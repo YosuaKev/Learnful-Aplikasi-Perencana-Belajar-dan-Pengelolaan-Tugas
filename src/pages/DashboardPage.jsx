@@ -19,7 +19,6 @@ import {
   LineChart,
   Users,
   Award,
-  Target as TargetIcon,
   CheckSquare,
   ListTodo,
   BookMarked,
@@ -29,6 +28,9 @@ import {
   TrendingDown,
   Eye
 } from 'lucide-react'
+
+// alias Target for places where a different name is convenient
+const TargetIcon = Target
 import { supabase } from '../services/supabaseClient.js'
 
 // Import Chart.js
@@ -1139,6 +1141,24 @@ const DashboardPage = () => {
     }
   })
 
+  // Helper: calculate consecutive-day streak from study sessions
+  const calculateCurrentStreak = (sessions) => {
+    if (!sessions || !sessions.length) return 0
+
+    let streak = 0
+    const dates = [...new Set(sessions.map(s => new Date(s.session_date).toDateString()))].sort().reverse()
+    let currentDate = new Date()
+    for (let i = 0; i < dates.length; i++) {
+      if (dates[i] === currentDate.toDateString()) {
+        streak++
+        currentDate.setDate(currentDate.getDate() - 1)
+      } else {
+        break
+      }
+    }
+    return streak
+  }
+
   
 
   useEffect(() => {
@@ -1232,24 +1252,7 @@ const DashboardPage = () => {
 
   
 
-  const calculateCurrentStreak = (sessions) => {
-    if (!sessions.length) return 0
-
-    let streak = 0
-    const dates = [...new Set(sessions.map(s => new Date(s.session_date).toDateString()))].sort().reverse()
-    
-    let currentDate = new Date()
-    for (let i = 0; i < dates.length; i++) {
-      if (dates[i] === currentDate.toDateString()) {
-        streak++
-        currentDate.setDate(currentDate.getDate() - 1)
-      } else {
-        break
-      }
-    }
-    
-    return streak
-  }
+  
 
   const handleToggleTaskComplete = async (taskId, completed) => {
     try {

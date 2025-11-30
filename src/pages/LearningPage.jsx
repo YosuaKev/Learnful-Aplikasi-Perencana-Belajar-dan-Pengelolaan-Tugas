@@ -208,6 +208,8 @@ const GoalCard = ({ goal, sessionTimer, timeElapsed, isTimerRunning, onStartTime
 }
 
 const GoalModal = ({ isOpen, onClose, onSave, goal, isEditing }) => {
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState({ 
     title: '', 
     description: '', 
@@ -259,8 +261,6 @@ const GoalModal = ({ isOpen, onClose, onSave, goal, isEditing }) => {
   }
 
   if (!isOpen) return null
-
-  const navigate = useNavigate()
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end sm:items-center justify-center p-0 sm:p-4 z-50">
