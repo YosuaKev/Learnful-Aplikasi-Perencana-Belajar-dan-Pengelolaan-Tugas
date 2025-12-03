@@ -101,7 +101,7 @@ const GoalCard = ({ goal, sessionTimer, timeElapsed, isTimerRunning, onStartTime
   const targetHours = goal.target_hours_per_week || 0
 
   return (
-    <div onClick={() => onOpen && onOpen()} role="button" tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onOpen && onOpen()} className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-all duration-300 group cursor-pointer">
+    <div onClick={() => onOpen && onOpen()} role="button" tabIndex={0} onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onOpen && onOpen()} className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-all duration-300 group cursor-pointer">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className={`p-2 sm:p-3 rounded-lg sm:rounded-xl bg-linear-to-r ${colorClasses[goal.color] || colorClasses.indigo} text-white`}>
@@ -208,7 +208,6 @@ const GoalCard = ({ goal, sessionTimer, timeElapsed, isTimerRunning, onStartTime
 }
 
 const GoalModal = ({ isOpen, onClose, onSave, goal, isEditing }) => {
-  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({ 
     title: '', 
@@ -264,7 +263,7 @@ const GoalModal = ({ isOpen, onClose, onSave, goal, isEditing }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end sm:items-center justify-center p-0 sm:p-4 z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-4 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-3 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
         {/* Swipe indicator for mobile */}
         <div className="sm:hidden flex justify-center mb-2">
           <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
@@ -275,7 +274,7 @@ const GoalModal = ({ isOpen, onClose, onSave, goal, isEditing }) => {
             {isEditing ? 'Edit Goal' : 'New Goal'}
           </h2>
           <button onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
-            <X size={20} />
+            <X size={20} className="text-white" />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -403,7 +402,7 @@ const StudySchedule = ({ goals, studySessions, onDeleteSession }) => {
 
   return (
     <div className="space-y-4 sm:space-y-6">
-      <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Weekly Schedule</h3>
         
         <div className="overflow-x-auto -mx-2 px-2 sm:mx-0 sm:px-0">
@@ -461,7 +460,7 @@ const StudySchedule = ({ goals, studySessions, onDeleteSession }) => {
       </div>
 
       {/* Recent Study Sessions dengan fitur hapus */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Sessions</h3>
         <div className="space-y-2 sm:space-y-3">
           {studySessions.slice(0, 5).map(session => ( // Show fewer on mobile
@@ -543,7 +542,7 @@ const ProgressStats = ({ goals, studySessions }) => {
     <div className="space-y-4 sm:space-y-6">
       {/* Overview Cards */}
       <div className="grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
           <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
             <div className="p-1.5 sm:p-2 bg-indigo-100 dark:bg-indigo-900 rounded-lg">
               <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-600 dark:text-indigo-400" />
@@ -557,7 +556,7 @@ const ProgressStats = ({ goals, studySessions }) => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
           <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
             <div className="p-1.5 sm:p-2 bg-emerald-100 dark:bg-emerald-900 rounded-lg">
               <Activity className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 dark:text-emerald-400" />
@@ -571,7 +570,7 @@ const ProgressStats = ({ goals, studySessions }) => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
           <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
             <div className="p-1.5 sm:p-2 bg-amber-100 dark:bg-amber-900 rounded-lg">
               <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400" />
@@ -585,7 +584,7 @@ const ProgressStats = ({ goals, studySessions }) => {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
           <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
             <div className="p-1.5 sm:p-2 bg-purple-100 dark:bg-purple-900 rounded-lg">
               <Award className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-400" />
@@ -601,7 +600,7 @@ const ProgressStats = ({ goals, studySessions }) => {
       </div>
 
       {/* Study Time by Goal */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Study by Goal</h3>
         <div className="space-y-3 sm:space-y-4">
           {studyTimeByGoal.map(({ goal, totalTime, sessionCount }) => {
@@ -639,7 +638,7 @@ const ProgressStats = ({ goals, studySessions }) => {
       </div>
 
       {/* Weekly Progress */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Weekly Progress</h3>
         <div className="space-y-3 sm:space-y-4">
           {goals.map(goal => {
@@ -708,7 +707,7 @@ const Auth = () => {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+    <div className="bg-white dark:bg-gray-800 p-3 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
       <h2 className="text-lg sm:text-xl font-bold mb-4 text-gray-900 dark:text-white">
         {isSignUp ? 'Sign Up' : 'Login'}
       </h2>
@@ -1161,12 +1160,12 @@ export default function LearningPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-3 sm:p-4 md:p-6">
+    <div className="min-h-screen bg-transparent sm:bg-gray-50 dark:bg-gray-900 p-3 sm:p-4 md:p-6">
       <div className="max-w-5xl mx-auto w-full">
       {/* Auth Modal */}
       {showAuth && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end sm:items-center justify-center p-0 sm:p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-4 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-3 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
             {/* Swipe indicator for mobile */}
             <div className="sm:hidden flex justify-center mb-2">
               <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
@@ -1175,7 +1174,7 @@ export default function LearningPage() {
             <div className="flex items-center justify-between mb-4 sm:mb-6">
               <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Login Required</h2>
               <button onClick={() => setShowAuth(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
-                <X size={20} />
+                <X size={20} className="text-white" />
               </button>
             </div>
             <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm sm:text-base">
@@ -1187,12 +1186,12 @@ export default function LearningPage() {
       )}
 
       <div className="mb-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-7">
           <div className="flex-1">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">
               Learning Planner
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base mb-4">
               Track your learning goals and monitor progress
             </p>
             {!user && isSupabaseConfigured && (
@@ -1205,8 +1204,6 @@ export default function LearningPage() {
                 </button>
               </p>
             )}
-          </div>
-          <div className="flex items-center gap-2 self-end sm:self-auto">
             {!user && isSupabaseConfigured && (
               <button 
                 onClick={() => setShowAuth(true)}

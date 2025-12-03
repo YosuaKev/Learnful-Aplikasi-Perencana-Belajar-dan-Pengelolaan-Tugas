@@ -96,7 +96,7 @@ export default function MobileNavbar({ currentPage, onNavigate }) {
       )}
 
       {/* Bottom Navigation - Tanpa logout */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-t border-gray-700 px-4 py-2 z-40">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-gray-900 backdrop-blur-lg border-t border-transparent px-4 py-2 z-50">
         <div className="flex items-center justify-around max-w-lg mx-auto">
           {navItems.map((item) => {
             const IconComponent = item.icon

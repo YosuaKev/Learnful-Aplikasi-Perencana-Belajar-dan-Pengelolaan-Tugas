@@ -357,7 +357,7 @@ export default function GoalDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-transparent sm:bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400">Loading goal details...</p>
@@ -368,7 +368,7 @@ export default function GoalDetailPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-transparent sm:bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <p className="text-red-600 dark:text-red-400 mb-4">{error}</p>
           <button
@@ -384,7 +384,7 @@ export default function GoalDetailPage() {
 
   if (!goal) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-transparent sm:bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
         <div className="text-center">
           <p className="text-gray-600 dark:text-gray-400 mb-4">Goal not found</p>
           <button
@@ -454,24 +454,24 @@ export default function GoalDetailPage() {
                   {!sessionTimer && (
                     <button
                       onClick={startTimer}
-                      className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
+                      className="flex items-center gap-1 sm:gap-2 px-3 py-1 sm:px-4 sm:py-2 bg-emerald-500 text-white rounded-md sm:rounded-lg hover:bg-emerald-600 transition-colors text-sm sm:text-base"
                     >
-                      <Play className="w-4 h-4" />
+                      <Play className="w-3 h-3 sm:w-4 sm:h-4" />
                       Start Session
                     </button>
                   )}
                   <button
                     onClick={() => setIsEditing(true)}
-                    className="flex items-center gap-2 px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors"
+                    className="flex items-center gap-1 sm:gap-2 px-3 py-1 sm:px-4 sm:py-2 bg-indigo-500 text-white rounded-md sm:rounded-lg hover:bg-indigo-600 transition-colors text-sm sm:text-base"
                   >
-                    <Edit className="w-4 h-4" />
+                    <Edit className="w-3 h-3 sm:w-4 sm:h-4" />
                     Edit Goal
                   </button>
                   <button
                     onClick={handleDelete}
-                    className="flex items-center gap-2 px-4 py-2 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition-colors"
+                    className="flex items-center gap-1 sm:gap-2 px-3 py-1 sm:px-4 sm:py-2 bg-rose-500 text-white rounded-md sm:rounded-lg hover:bg-rose-600 transition-colors text-sm sm:text-base"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
                     Delete
                   </button>
                 </>
@@ -481,7 +481,7 @@ export default function GoalDetailPage() {
                     onClick={() => setIsEditing(false)}
                     className="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
                   >
-                    <X className="w-4 h-4" />
+                    <X className="w-4 h-4 " />
                     Cancel
                   </button>
                   <button
@@ -504,7 +504,7 @@ export default function GoalDetailPage() {
           {/* Left Column - Goal Details */}
           <div className="lg:col-span-2 space-y-6">
             {/* Goal Header */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
               <div className="flex items-start justify-between mb-6">
                 <div className="flex-1">
                   {isEditing ? (
@@ -559,36 +559,36 @@ export default function GoalDetailPage() {
 
             {/* Session Timer */}
             {sessionTimer && (
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                 <div className="text-center">
                   <div className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
                     {formatTime(timeElapsed)}
                   </div>
                   <div className="flex gap-3 justify-center">
                     {isTimerRunning ? (
+                        <button
+                          onClick={stopTimer}
+                          className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-amber-500 text-white rounded-md sm:rounded-lg hover:bg-amber-600 transition-colors text-sm sm:text-base"
+                        >
+                          <Pause className="w-3 h-3 sm:w-4 sm:h-4" />
+                          Pause
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => setIsTimerRunning(true)}
+                          className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-emerald-500 text-white rounded-md sm:rounded-lg hover:bg-emerald-600 transition-colors text-sm sm:text-base"
+                        >
+                          <Play className="w-3 h-3 sm:w-4 sm:h-4" />
+                          Resume
+                        </button>
+                      )}
                       <button
-                        onClick={stopTimer}
-                        className="flex items-center gap-2 px-6 py-3 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors"
+                        onClick={completeSession}
+                        className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-indigo-500 text-white rounded-md sm:rounded-lg hover:bg-indigo-600 transition-colors text-sm sm:text-base"
                       >
-                        <Pause className="w-4 h-4" />
-                        Pause
+                        <Square className="w-3 h-3 sm:w-4 sm:h-4" />
+                        Complete Session
                       </button>
-                    ) : (
-                      <button
-                        onClick={() => setIsTimerRunning(true)}
-                        className="flex items-center gap-2 px-6 py-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
-                      >
-                        <Play className="w-4 h-4" />
-                        Resume
-                      </button>
-                    )}
-                    <button
-                      onClick={completeSession}
-                      className="flex items-center gap-2 px-6 py-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition-colors"
-                    >
-                      <Square className="w-4 h-4" />
-                      Complete Session
-                    </button>
                   </div>
                   {/* session notes removed */}
                 </div>
@@ -623,7 +623,7 @@ export default function GoalDetailPage() {
               <div className="space-y-6">
                 {/* Statistics */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
+                  <div className="bg-white dark:bg-gray-800 rounded-xl p-3 sm:p-4 text-center">
                     <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
                       {sessions.length}
                     </div>
@@ -650,7 +650,7 @@ export default function GoalDetailPage() {
                 </div>
 
                 {/* Skills & Milestones */}
-                <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+                <div className="bg-white dark:bg-gray-800 rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                     Skills & Milestones
                   </h3>
@@ -694,7 +694,7 @@ export default function GoalDetailPage() {
             )}
 
             {activeTab === 'resources' && (
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                   Learning Resources
                 </h3>
@@ -726,7 +726,7 @@ export default function GoalDetailPage() {
           {/* Right Column - Sidebar */}
           <div className="space-y-6">
             {/* Goal Metadata */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Goal Details
               </h3>
@@ -778,17 +778,17 @@ export default function GoalDetailPage() {
                 {!sessionTimer ? (
                   <button
                     onClick={startTimer}
-                    className="w-full flex items-center gap-3 p-3 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
+                    className="w-full flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-emerald-500 text-white rounded-md sm:rounded-lg hover:bg-emerald-600 transition-colors text-sm sm:text-base"
                   >
-                    <Play className="w-5 h-5" />
+                    <Play className="w-4 h-4 sm:w-5 sm:h-5" />
                     Start Study Session
                   </button>
                 ) : (
                   <button
                     onClick={closeSession}
-                    className="w-full flex items-center gap-3 p-3 bg-rose-500 text-white rounded-lg hover:bg-rose-600 transition-colors"
+                    className="w-full flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-rose-500 text-white rounded-md sm:rounded-lg hover:bg-rose-600 transition-colors text-sm sm:text-base"
                   >
-                    <X className="w-5 h-5" />
+                    <X className="w-4 h-4 sm:w-5 sm:h-5" />
                     Close Session
                   </button>
                 )}

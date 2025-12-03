@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -40,7 +40,7 @@ const demoCategories = [
 ]
 
 // Event Modal Component
-const EventModal = ({ event, onSave, onClose, onDelete, isEditing, goals = [] }) => {
+const EventModal = ({ event, onSave, onClose, onDelete, isEditing = [] }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -53,6 +53,9 @@ const EventModal = ({ event, onSave, onClose, onDelete, isEditing, goals = [] })
   })
 
   const [saving, setSaving] = useState(false)
+
+  const startInputRef = useRef(null)
+  const endInputRef = useRef(null)
 
   // Initialize form when event changes
   useEffect(() => {
@@ -175,33 +178,67 @@ const EventModal = ({ event, onSave, onClose, onDelete, isEditing, goals = [] })
           </div>
 
           {/* Date and Time */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Start Date & Time *
-              </label>
-              <input
-                type="datetime-local"
-                required
-                value={formData.start_time}
-                onChange={(e) => setFormData(prev => ({ ...prev, start_time: e.target.value }))}
-                className="w-full px-3 sm:px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-white text-sm sm:text-base"
-              />
-            </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Start Date & Time *
+                      </label>
+                      <div className="relative">
+                        <input
+                          ref={startInputRef}
+                          type="datetime-local"
+                          required
+                          value={formData.start_time}
+                          onChange={(e) => setFormData(prev => ({ ...prev, start_time: e.target.value }))}
+                          className="w-full pr-10 px-3 sm:px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-white text-sm sm:text-base"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const el = startInputRef.current
+                            if (el) {
+                              if (el.showPicker) el.showPicker()
+                              else el.focus()
+                            }
+                          }}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-indigo-500 rounded text-white"
+                          aria-label="Open start date picker"
+                        >
+                          <CalendarIcon className="w-4 h-4 text-white" />
+                        </button>
+                      </div>
+                    </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                End Date & Time *
-              </label>
-              <input
-                type="datetime-local"
-                required
-                value={formData.end_time}
-                onChange={(e) => setFormData(prev => ({ ...prev, end_time: e.target.value }))}
-                className="w-full px-3 sm:px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-white text-sm sm:text-base"
-              />
-            </div>
-          </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        End Date & Time *
+                      </label>
+                      <div className="relative">
+                        <input
+                          ref={endInputRef}
+                          type="datetime-local"
+                          required
+                          value={formData.end_time}
+                          onChange={(e) => setFormData(prev => ({ ...prev, end_time: e.target.value }))}
+                          className="w-full pr-10 px-3 sm:px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-white text-sm sm:text-base"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const el = endInputRef.current
+                            if (el) {
+                              if (el.showPicker) el.showPicker()
+                              else el.focus()
+                            }
+                          }}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-indigo-500 rounded text-white"
+                          aria-label="Open end date picker"
+                        >
+                          <CalendarIcon className="w-4 h-4 text-white" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
 
           {/* Event Type and Category */}
           <div className="grid grid-cols-1 sm:grid-cols-1 gap-3 sm:gap-4">
@@ -224,40 +261,7 @@ const EventModal = ({ event, onSave, onClose, onDelete, isEditing, goals = [] })
               </select>
             </div>
           </div>
-
-          {/* Learning Goal */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Learning Goal (Optional)
-            </label>
-            <select
-              value={formData.goal_id}
-              onChange={(e) => setFormData(prev => ({ ...prev, goal_id: e.target.value }))}
-              className="w-full px-3 sm:px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-white text-sm sm:text-base"
-            >
-              <option value="">Select Learning Goal</option>
-              {goals.map(goal => (
-                <option key={goal.id} value={goal.id}>
-                  {goal.title}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Location */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Location
-            </label>
-            <input
-              type="text"
-              value={formData.location}
-              onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-              className="w-full px-3 sm:px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 text-sm sm:text-base"
-              placeholder="Enter location"
-            />
-          </div>
-
+     
           {/* Reminders */}
           <div>
             <div className="flex items-center justify-between mb-2">
@@ -296,29 +300,6 @@ const EventModal = ({ event, onSave, onClose, onDelete, isEditing, goals = [] })
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Checkboxes */}
-          <div className="flex gap-4 sm:gap-6">
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={formData.all_day}
-                onChange={(e) => setFormData(prev => ({ ...prev, all_day: e.target.checked }))}
-                className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4"
-              />
-              <span className="text-sm text-gray-700 dark:text-gray-300">All day event</span>
-            </label>
-
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={formData.recurring}
-                onChange={(e) => setFormData(prev => ({ ...prev, recurring: e.target.checked }))}
-                className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4"
-              />
-              <span className="text-sm text-gray-700 dark:text-gray-300">Recurring event</span>
-            </label>
           </div>
 
           {/* Actions */}
@@ -862,7 +843,7 @@ export default function CalendarPage() {
         <div className="flex items-start justify-between">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <IconComponent className="w-3 h-3 shrink-0" />
+              <IconComponent className={`w-3 h-3 shrink-0 ${IconComponent === CalendarIcon ? 'text-white' : ''}`} />
               <h4 className="font-medium text-sm truncate">{event.title}</h4>
             </div>
             <div className="flex items-center gap-1 text-xs opacity-90">
@@ -971,7 +952,7 @@ export default function CalendarPage() {
                 }`}
               >
                 <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center ${item.color} text-white`}>
-                  {Icon ? React.createElement(Icon, { className: 'w-3 h-3 sm:w-4 sm:h-4' }) : null}
+                  {Icon ? React.createElement(Icon, { className: `w-3 h-3 sm:w-4 sm:h-4 ${Icon === CalendarIcon ? 'text-white' : ''}` }) : null}
                 </div>
                 <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
                   {item.label}
@@ -1020,7 +1001,7 @@ export default function CalendarPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 flex items-center justify-center">
+      <div className="fixed inset-0 bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4 z-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-b-2 border-indigo-600 mx-auto mb-3 sm:mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">Loading calendar...</p>
@@ -1030,7 +1011,7 @@ export default function CalendarPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-3 sm:p-4 md:p-6">
+    <div className="min-h-screen bg-transparent sm:bg-gray-50 dark:bg-gray-900 p-3 sm:p-4 md:p-6">
       {/* Header */}
       <div className="mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
@@ -1192,7 +1173,7 @@ export default function CalendarPage() {
           ].map(item => (
             <div key={item.type} className="flex items-center gap-2 sm:gap-3">
               <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded ${getEventColor(item.type)}`}></div>
-              <item.icon className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" />
+              <item.icon className={`w-3 h-3 sm:w-4 sm:h-4 ${item.icon === CalendarIcon ? 'text-white' : 'text-gray-400'}`} />
               <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{item.label}</span>
             </div>
           ))}

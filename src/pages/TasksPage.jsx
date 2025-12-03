@@ -81,7 +81,7 @@ const TaskCard = ({ task, onEdit, onDelete, onStatusChange, onOpen }) => {
   const categoryColor = task.categories?.color || '#6B7280'
 
   return (
-    <div onClick={() => onOpen && onOpen(task)} className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-all duration-300 group cursor-pointer">
+    <div onClick={() => onOpen && onOpen(task)} className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-all duration-300 group cursor-pointer">
       {/* Header */}
       <div className="flex items-start justify-between mb-3 sm:mb-4">
         <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
@@ -243,7 +243,7 @@ const TaskModal = ({
           <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
         </div>
         
-        <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800">
+        <div className="p-3 sm:p-6 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800">
           <div className="flex items-center justify-between">
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
               {isEditing ? 'Edit Task' : 'New Task'}
@@ -257,7 +257,7 @@ const TaskModal = ({
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+        <form onSubmit={handleSubmit} className="p-3 sm:p-6 space-y-4 sm:space-y-6">
           {/* Title */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -945,7 +945,7 @@ export default function TasksPage() {
     }
 
     return (
-      <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-gray-800 p-3 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
         <h2 className="text-lg sm:text-xl font-bold mb-4 text-gray-900 dark:text-white">
           {isSignUp ? 'Sign Up' : 'Login'}
         </h2>
@@ -1012,11 +1012,11 @@ export default function TasksPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-3 sm:p-4 md:p-6">
+    <div className="min-h-screen bg-transparent sm:bg-gray-50 dark:bg-gray-900 p-3 sm:p-4 md:p-6">
       {/* Auth Modal */}
       {showAuth && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end sm:items-center justify-center p-0 sm:p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-4 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-3 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
             {/* Swipe indicator for mobile */}
             <div className="sm:hidden flex justify-center mb-2">
               <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
@@ -1119,7 +1119,7 @@ export default function TasksPage() {
 
       {/* Filters Panel */}
       {showFilters && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700 mb-4 sm:mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700 mb-4 sm:mb-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             {/* Category Filter */}
             <div>

@@ -17,7 +17,17 @@ import './index.css'
 
 function App() {
   const [showSplash, setShowSplash] = useState(true)
-  const [currentPage, setCurrentPage] = useState('dashboard')
+  const [currentPage, setCurrentPage] = useState(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem('learnful_currentPage')
+        return saved || 'dashboard'
+      }
+    } catch {
+      // ignore
+    }
+    return 'dashboard'
+  })
   const [darkMode, setDarkMode] = useState(() => {
     // Check localStorage untuk dark mode preference
     if (typeof window !== 'undefined') {
@@ -40,10 +50,8 @@ function App() {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark')
-      document.documentElement.style.backgroundColor = '#111827'
     } else {
       document.documentElement.classList.remove('dark')
-      document.documentElement.style.backgroundColor = '#f9fafb'
     }
     
     // Save to localStorage
@@ -74,12 +82,14 @@ function App() {
       console.log('Auth state changed:', event, session?.user?.email)
       setUser(session?.user || null)
       setLoading(false)
-      
-      // Redirect to dashboard after successful auth
+
+      // Only navigate to dashboard after SIGNED_IN if the app was showing the auth page.
+      // Supabase may emit session refresh events when switching tabs; avoid forcing navigation
+      // which resets the user's current location unexpectedly.
       if (event === 'SIGNED_IN' && session?.user) {
-        setCurrentPage('dashboard')
+        setCurrentPage(prev => prev === 'auth' ? 'dashboard' : prev)
       }
-      
+
       // Redirect to auth page when signed out
       if (event === 'SIGNED_OUT') {
         setCurrentPage('auth')
@@ -95,6 +105,11 @@ function App() {
 
   const handleNavigation = (page) => {
     setCurrentPage(page)
+    try {
+      if (typeof window !== 'undefined') localStorage.setItem('learnful_currentPage', page)
+    } catch {
+      // ignore
+    }
   }
 
   const handleThemeChange = (theme) => {
@@ -177,7 +192,7 @@ function App() {
 
   return (
     <div className="min-h-screen transition-colors duration-300">
-      <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <div className={`min-h-screen ${darkMode ? 'dark:sm:bg-gray-900 bg-transparent' : 'bg-transparent sm:bg-gray-50'}`}>
         {/* Desktop Navbar - hanya tampil jika user login dan bukan di auth/task-detail page */}
         {showNavbar && (
           <DesktopNavbar 

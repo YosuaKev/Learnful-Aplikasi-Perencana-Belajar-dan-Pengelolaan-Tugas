@@ -1357,10 +1357,6 @@ const DashboardPage = () => {
                 {dashboardData.stats.currentStreak} day streak
               </span>
             </div>
-                <button className="bg-linear-to-r from-indigo-500 to-purple-600 text-white px-5 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300 flex items-center gap-2 text-sm">
-              <Plus className="w-5 h-5" />
-              New Task
-            </button>
           </div>
         </div>
 
