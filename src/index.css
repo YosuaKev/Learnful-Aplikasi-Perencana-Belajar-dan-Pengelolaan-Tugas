@@ -1,16 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
+/* Default font */
 * {
   font-family: 'Inter', sans-serif;
 }
 
-body {
-  font-family: 'Inter', sans-serif;
+/* Full transparency on mobile */
+html, body {
+  background-color: transparent !important;
+  height: 100%;
+  margin: 0;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Keep body transparent on small screens to avoid white strips behind fixed navbars */
-  background-color: transparent;
+}
+
+/* Prevent white background behind fixed navbar */
+#root {
+  height: 100%;
+  background-color: transparent !important;
 }
 
 /* Custom Scrollbar */
@@ -31,7 +40,7 @@ body {
   background: #94a3b8;
 }
 
-/* Animation Classes */
+/* Animations */
 .fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -55,7 +64,7 @@ body {
   transition: stroke-dashoffset 0.5s ease-in-out;
 }
 
-/* Custom Gradient Backgrounds */
+/* Gradients */
 .gradient-primary {
   background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
 }
@@ -68,46 +77,42 @@ body {
   background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
 }
 
-/* Fix untuk mobile layout */
+/* Safe area fix for mobile */
 .mobile-safe-area {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   min-height: 100vh;
 }
 
-/* Pastikan background penuh */
-html, body, #root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* Apply full-page background only on sm+ screens so mobile shows transparent background */
-@media (min-width: 640px) {
-  body {
-    background-color: #f9fafb; /* light mode for larger screens */
-  }
-
-  body.dark {
-    background-color: #111827; /* dark mode for larger screens */
-  }
-}
-
+/* Ensure full-page stretch */
 .min-h-screen {
   min-height: 100vh !important;
 }
 
+/* Tailwind override for dark navbar */
 .bg-gray-900 {
-  background-color: #111827;
+  background-color: #111827 !important;
 }
 
+/* Smooth transitions */
 * {
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
+/* For iOS safe-area bottom */
 @supports(padding: max(0px)) {
   .mobile-safe-bottom {
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 }
 
+/* Desktop backgrounds ONLY */
+@media (min-width: 640px) {
+  html, body {
+    background-color: #f9fafb !important;
+  }
+
+  html.dark, body.dark {
+    background-color: #111827 !important;
+  }
+}

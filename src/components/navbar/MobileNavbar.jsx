@@ -68,7 +68,7 @@ export default function MobileNavbar({ currentPage, onNavigate }) {
     <>
       {/* Top Sidebar - Hanya untuk logout */}
       {user && (
-        <div className="md:hidden fixed top-0 left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-b border-gray-700 z-50">
+        <div className="md:hidden fixed top-0 left-0 right-0 bg-gray-900 border-b border-transparent z-50">
           <div className="px-4 py-3 flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-linear-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
