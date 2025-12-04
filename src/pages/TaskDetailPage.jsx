@@ -242,7 +242,7 @@ export default function TaskDetailPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-40">
+      <div className="bg-transparent dark:bg-transparent border-b border-transparent sm:border-gray-200 dark:border-transparent dark:sm:border-gray-700 sticky top-0 z-40 sm:bg-white dark:sm:bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-4">

@@ -125,14 +125,14 @@ const EventModal = ({ event, onSave, onClose, onDelete, isEditing = [] }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end sm:items-center justify-center p-0 sm:p-4 z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+      <div className="bg-gray-50 dark:bg-gray-900 sm:bg-white dark:sm:bg-gray-800 rounded-t-2xl sm:rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         {/* Swipe indicator for mobile */}
         <div className="sm:hidden flex justify-center py-2">
           <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
         </div>
         
         {/* Header */}
-        <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800">
+        <div className="p-4 sm:p-6 border-b border-transparent sm:border-gray-200 dark:border-transparent dark:sm:border-gray-700 sticky top-0 bg-transparent dark:bg-transparent sm:bg-white dark:sm:bg-gray-800">
           <div className="flex items-center justify-between">
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
               {isEditing ? 'Edit Event' : 'Create Event'}
@@ -303,7 +303,7 @@ const EventModal = ({ event, onSave, onClose, onDelete, isEditing = [] }) => {
           </div>
 
           {/* Actions */}
-          <div className="flex gap-2 sm:gap-3 pt-4 border-t border-gray-200 dark:border-gray-700 sticky bottom-0 bg-white dark:bg-gray-800 pb-2">
+          <div className="flex gap-2 sm:gap-3 pt-4 border-t border-transparent sm:border-gray-200 dark:border-transparent dark:sm:border-gray-700 sticky bottom-0 bg-transparent dark:bg-transparent sm:bg-white dark:sm:bg-gray-800 pb-2">
             {isEditing && (
               <button
                 type="button"

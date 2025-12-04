@@ -509,7 +509,7 @@ const TasksView = ({ tasks, onToggleTaskComplete, loading }) => {
           { key: 'completed', label: 'Completed', icon: CheckCircle },
           { key: 'in_progress', label: 'In Progress', icon: Clock4 },
           { key: 'high', label: 'High Priority', icon: AlertCircle }
-        ].map(({ key, label, icon: Icon }) => (
+        ].map(({ key, label }) => (
           <button
             key={key}
             onClick={() => setFilter(key)}

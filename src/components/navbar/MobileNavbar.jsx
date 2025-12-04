@@ -5,17 +5,15 @@ import { supabase } from '../../services/supabaseClient'
 export default function MobileNavbar({ currentPage, onNavigate }) {
   const [user, setUser] = useState(null)
 
-  // Nav items untuk user belum login
   const guestNavItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'tasks', label: 'Tasks', icon: CheckSquare },
     { id: 'learning', label: 'Learning', icon: BookOpen },
     { id: 'calendar', label: 'Calendar', icon: Calendar },
     { id: 'profile', label: 'Profile', icon: User },
-    { id: 'auth', label: 'Auth', icon: LogIn } 
+    { id: 'auth', label: 'Auth', icon: LogIn }
   ]
 
-  // Nav items untuk user sudah login (tanpa logout di bottom)
   const userNavItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'tasks', label: 'Tasks', icon: CheckSquare },
@@ -95,8 +93,8 @@ export default function MobileNavbar({ currentPage, onNavigate }) {
         </div>
       )}
 
-      {/* Bottom Navigation - Tanpa logout */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-gray-900 backdrop-blur-lg border-t border-transparent px-4 py-2 z-50">
+      {/* Bottom Navigation - Tanpa garis putih */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-transparent px-4 py-2 z-50">
         <div className="flex items-center justify-around max-w-lg mx-auto">
           {navItems.map((item) => {
             const IconComponent = item.icon
@@ -108,7 +106,7 @@ export default function MobileNavbar({ currentPage, onNavigate }) {
                 onClick={() => handleNavClick(item.id)}
                 className={`flex flex-col items-center py-2 px-3 transition-all duration-200 rounded-xl ${
                   isActive
-                    ? 'text-indigo-400 bg-indigo-900/20' 
+                    ? 'text-indigo-400 bg-indigo-900/20'
                     : 'text-gray-400 hover:text-indigo-300'
                 }`}
               >

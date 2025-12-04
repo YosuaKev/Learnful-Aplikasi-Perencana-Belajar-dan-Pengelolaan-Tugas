@@ -206,7 +206,7 @@ function App() {
         {/* Main content */}
         <main className={`min-h-screen transition-all duration-300 ${
           showNavbar 
-            ? 'pt-16 lg:pt-0 lg:pl-0 pb-20 lg:pb-0' 
+            ? 'pt-15 lg:pt-0 lg:pl-0 pb-18 lg:pb-0' 
             : 'pt-0 pb-0'
         }`}>
           <Routes>

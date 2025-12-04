@@ -263,7 +263,7 @@ const GoalModal = ({ isOpen, onClose, onSave, goal, isEditing }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end sm:items-center justify-center p-0 sm:p-4 z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-3 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="bg-gray-50 dark:bg-gray-900 sm:bg-white dark:sm:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-3 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
         {/* Swipe indicator for mobile */}
         <div className="sm:hidden flex justify-center mb-2">
           <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
@@ -337,7 +337,7 @@ const GoalModal = ({ isOpen, onClose, onSave, goal, isEditing }) => {
             </div>
           </div>
 
-          <div className="flex gap-2 sm:gap-3 pt-4 sticky bottom-0 bg-white dark:bg-gray-800 pb-2">
+          <div className="flex gap-2 sm:gap-3 pt-4 border-t border-transparent sm:border-gray-200 dark:border-transparent dark:sm:border-gray-700 sticky bottom-0 bg-transparent dark:bg-transparent sm:bg-white dark:sm:bg-gray-800 pb-2">
             <button 
               type="button" 
               onClick={onClose} 
@@ -1165,7 +1165,7 @@ export default function LearningPage() {
       {/* Auth Modal */}
       {showAuth && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end sm:items-center justify-center p-0 sm:p-4 z-50">
-          <div className="bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-3 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+          <div className="bg-gray-50 dark:bg-gray-900 sm:bg-white dark:sm:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-3 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
             {/* Swipe indicator for mobile */}
             <div className="sm:hidden flex justify-center mb-2">
               <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
