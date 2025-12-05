@@ -1,4 +1,4 @@
-import { Brain, Home, CheckSquare, BookOpen, Calendar, User, LogIn, LogOut } from 'lucide-react'
+import { Brain, Home, CheckSquare, BookOpen, Calendar, User, LogOut } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { supabase } from '../../services/supabaseClient'
 
@@ -6,26 +6,14 @@ export default function DesktopNavbar({ currentPage, onNavigate }) {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  // Nav items untuk user belum login
-  const guestNavItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: Home },
-    { id: 'tasks', label: 'Tasks', icon: CheckSquare },
-    { id: 'learning', label: 'Learning', icon: BookOpen },
-    { id: 'calendar', label: 'Calendar', icon: Calendar },
-    { id: 'profile', label: 'Profile', icon: User },
-    { id: 'auth', label: 'Auth', icon: LogIn } 
-  ]
-
   // Nav items untuk user sudah login (tanpa auth)
-  const userNavItems = [
+  const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: Home },
     { id: 'tasks', label: 'Tasks', icon: CheckSquare },
     { id: 'learning', label: 'Learning', icon: BookOpen },
     { id: 'calendar', label: 'Calendar', icon: Calendar },
     { id: 'profile', label: 'Profile', icon: User }
   ]
-
-  const navItems = user ? userNavItems : guestNavItems
 
   useEffect(() => {
     getCurrentUser()
@@ -73,6 +61,7 @@ export default function DesktopNavbar({ currentPage, onNavigate }) {
     return `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.email || 'U')}&background=indigo&color=fff&bold=true`
   }
 
+  // Jika masih loading, render loading state
   if (loading) {
     return (
       <nav className="hidden md:block shadow-lg border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 backdrop-blur-sm bg-white/95 dark:bg-gray-900/95">
@@ -94,6 +83,11 @@ export default function DesktopNavbar({ currentPage, onNavigate }) {
         </div>
       </nav>
     )
+  }
+
+  // Jika tidak ada user, jangan render navbar sama sekali
+  if (!user) {
+    return null
   }
 
   return (
@@ -138,34 +132,30 @@ export default function DesktopNavbar({ currentPage, onNavigate }) {
           {/* User Info */}
           <div className="flex items-center space-x-4">
             {/* User Avatar & Logout */}
-            {user ? (
-              <div className="flex items-center space-x-3">
-                <div className="flex items-center space-x-2">
-                  <img 
-                    src={getAvatarUrl()} 
-                    alt="User Avatar"
-                    className="w-8 h-8 rounded-full border-2 border-indigo-200 dark:border-indigo-800"
-                  />
-                  <div className="text-right">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white">
-                      {user.user_metadata?.full_name || user.user_metadata?.name || user.email?.split('@')[0]}
-                    </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {user.email}
-                    </p>
-                  </div>
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2">
+                <img 
+                  src={getAvatarUrl()} 
+                  alt="User Avatar"
+                  className="w-8 h-8 rounded-full border-2 border-indigo-200 dark:border-indigo-800"
+                />
+                <div className="text-right">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
+                    {user.user_metadata?.full_name || user.user_metadata?.name || user.email?.split('@')[0]}
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {user.email}
+                  </p>
                 </div>
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
-                >
-                  <LogOut className="w-4 h-4" />
-                  Logout
-                </button>
               </div>
-            ) : (
-              <div className="w-20"></div> // Spacer untuk konsistensi layout
-            )}
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -43,7 +43,8 @@ export default function ProfilePage() {
     const displayName = getDisplayName(userData)
     setEditedProfile({
       name: displayName,
-      bio: userData.user_metadata?.bio || 'Passionate learner and productivity enthusiast. Always looking for ways to improve and grow.'
+      bio: userData.user_metadata?.bio || 'Passionate learner and productivity enthusiast. Always looking for ways to improve and grow.',
+      avatar: userData.user_metadata?.avatar_url || null
     })
   }, [])
 
@@ -67,7 +68,7 @@ export default function ProfilePage() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session?.user) {
         setUser(session.user)
-        initializeProfile(session.user)
+        // Jangan panggil initializeProfile di sini untuk menghindari reset saat editing
       } else {
         setUser(null)
       }
@@ -75,7 +76,7 @@ export default function ProfilePage() {
     })
 
     return () => subscription.unsubscribe()
-  }, [getCurrentUser, initializeProfile])
+  }, [getCurrentUser])
 
   // Auto focus ke input name ketika editing mode aktif
   useEffect(() => {
@@ -83,8 +84,6 @@ export default function ProfilePage() {
       nameInputRef.current.focus()
     }
   }, [isEditing])
-
-  /* duplicate legacy definitions removed - using stable useCallback versions above */
 
   const getDisplayName = (userData) => {
     if (userData?.user_metadata?.full_name) {
@@ -127,16 +126,10 @@ export default function ProfilePage() {
     }
   }
 
-  // Avatar upload removed per request
-
   const handleCancelEdit = () => {
     initializeProfile(user)
     setIsEditing(false)
   }
-
-  // Avatar change handler removed
-
-  // Preferences and theme controls removed per request
 
   const handleLogout = async () => {
     try {
@@ -248,6 +241,7 @@ export default function ProfilePage() {
                       Full Name
                     </label>
                     <input
+                      key={`name-input-${isEditing}`} // KEY DI SINI
                       ref={nameInputRef}
                       type="text"
                       value={editedProfile.name}
@@ -266,6 +260,7 @@ export default function ProfilePage() {
                       Bio
                     </label>
                     <textarea
+                      key={`bio-input-${isEditing}`} // KEY DI SINI
                       ref={bioInputRef}
                       value={editedProfile.bio}
                       onChange={(e) => setEditedProfile(prev => ({ ...prev, bio: e.target.value }))}

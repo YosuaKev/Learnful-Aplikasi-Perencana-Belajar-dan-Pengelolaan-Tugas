@@ -509,7 +509,7 @@ const TasksView = ({ tasks, onToggleTaskComplete, loading }) => {
           { key: 'completed', label: 'Completed', icon: CheckCircle },
           { key: 'in_progress', label: 'In Progress', icon: Clock4 },
           { key: 'high', label: 'High Priority', icon: AlertCircle }
-        ].map(({ key, label }) => (
+        ].map(({ key, label, icon: Icon }) => (
           <button
             key={key}
             onClick={() => setFilter(key)}
@@ -519,7 +519,7 @@ const TasksView = ({ tasks, onToggleTaskComplete, loading }) => {
                 : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
             }`}
           >
-            <Icon className="w-4 h-4" />
+            {Icon ? <Icon className="w-4 h-4" /> : null}
             {label}
           </button>
         ))}

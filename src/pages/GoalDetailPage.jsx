@@ -457,7 +457,7 @@ export default function GoalDetailPage() {
                       className="flex items-center gap-1 sm:gap-2 px-3 py-1 sm:px-4 sm:py-2 bg-emerald-500 text-white rounded-md sm:rounded-lg hover:bg-emerald-600 transition-colors text-sm sm:text-base"
                     >
                       <Play className="w-3 h-3 sm:w-4 sm:h-4" />
-                      Start Session
+                        <span className="hidden sm:inline">Start Session</span>
                     </button>
                   )}
                   <button
@@ -465,14 +465,14 @@ export default function GoalDetailPage() {
                     className="flex items-center gap-1 sm:gap-2 px-3 py-1 sm:px-4 sm:py-2 bg-indigo-500 text-white rounded-md sm:rounded-lg hover:bg-indigo-600 transition-colors text-sm sm:text-base"
                   >
                     <Edit className="w-3 h-3 sm:w-4 sm:h-4" />
-                    Edit Goal
+                    <span className="hidden sm:inline">Edit Goal</span>
                   </button>
                   <button
                     onClick={handleDelete}
                     className="flex items-center gap-1 sm:gap-2 px-3 py-1 sm:px-4 sm:py-2 bg-rose-500 text-white rounded-md sm:rounded-lg hover:bg-rose-600 transition-colors text-sm sm:text-base"
                   >
                     <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
-                    Delete
+                    <span className="hidden sm:inline">Delete</span>
                   </button>
                 </>
               ) : (
@@ -482,14 +482,14 @@ export default function GoalDetailPage() {
                     className="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
                   >
                     <X className="w-4 h-4 " />
-                    Cancel
+                    <span className="hidden sm:inline">Cancel</span>
                   </button>
                   <button
                     onClick={handleSave}
                     className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition-colors"
                   >
                     <Save className="w-4 h-4" />
-                    Save Changes
+                    <span className="hidden sm:inline">Save Changes</span>
                   </button>
                 </>
               )}
@@ -500,7 +500,7 @@ export default function GoalDetailPage() {
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
           {/* Left Column - Goal Details */}
           <div className="lg:col-span-2 space-y-6">
             {/* Goal Header */}
@@ -551,8 +551,13 @@ export default function GoalDetailPage() {
                     ></div>
                   </div>
                 </div>
-                <div className="ml-6">
-                    <ProgressRing progress={progressPercent} />
+                <div className="ml-0 sm:ml-6">
+                  <div className="hidden sm:block">
+                    <ProgressRing progress={progressPercent} size={120} />
+                  </div>
+                  <div className="block sm:hidden">
+                    <ProgressRing progress={progressPercent} size={72} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -571,7 +576,7 @@ export default function GoalDetailPage() {
                           className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-amber-500 text-white rounded-md sm:rounded-lg hover:bg-amber-600 transition-colors text-sm sm:text-base"
                         >
                           <Pause className="w-3 h-3 sm:w-4 sm:h-4" />
-                          Pause
+                            <span className="hidden sm:inline">Pause</span>
                         </button>
                       ) : (
                         <button
@@ -579,7 +584,7 @@ export default function GoalDetailPage() {
                           className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-emerald-500 text-white rounded-md sm:rounded-lg hover:bg-emerald-600 transition-colors text-sm sm:text-base"
                         >
                           <Play className="w-3 h-3 sm:w-4 sm:h-4" />
-                          Resume
+                            <span className="hidden sm:inline">Resume</span>
                         </button>
                       )}
                       <button
@@ -587,7 +592,7 @@ export default function GoalDetailPage() {
                         className="flex items-center gap-1 sm:gap-2 px-4 py-2 sm:px-6 sm:py-3 bg-indigo-500 text-white rounded-md sm:rounded-lg hover:bg-indigo-600 transition-colors text-sm sm:text-base"
                       >
                         <Square className="w-3 h-3 sm:w-4 sm:h-4" />
-                        Complete Session
+                        <span className="hidden sm:inline">Complete Session</span>
                       </button>
                   </div>
                   {/* session notes removed */}
@@ -690,35 +695,6 @@ export default function GoalDetailPage() {
                     <p className="text-sm">Start your first session to track progress</p>
                   </div>
                 )}
-              </div>
-            )}
-
-            {activeTab === 'resources' && (
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-3 sm:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  Learning Resources
-                </h3>
-                <div className="space-y-3">
-                  {goal.resources?.map((resource, index) => (
-                    <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                      <FileText className="w-5 h-5 text-blue-500" />
-                      <div className="flex-1">
-                        <h4 className="font-medium text-gray-900 dark:text-white">{resource}</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Learning material</p>
-                      </div>
-                      <button className="px-3 py-1 bg-indigo-500 text-white rounded-lg text-sm hover:bg-indigo-600 transition-colors">
-                        Open
-                      </button>
-                    </div>
-                  ))}
-
-                  {(!goal.resources || goal.resources.length === 0) && (
-                    <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                      <BookOpen className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                      <p>No resources added yet</p>
-                    </div>
-                  )}
-                </div>
               </div>
             )}
           </div>

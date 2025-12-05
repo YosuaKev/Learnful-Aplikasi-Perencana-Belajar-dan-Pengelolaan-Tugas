@@ -263,21 +263,23 @@ const GoalModal = ({ isOpen, onClose, onSave, goal, isEditing }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end sm:items-center justify-center p-0 sm:p-4 z-50">
-      <div className="bg-gray-50 dark:bg-gray-900 sm:bg-white dark:sm:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-3 sm:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="bg-gray-50 dark:bg-gray-900 sm:bg-white dark:sm:bg-gray-800 rounded-t-2xl sm:rounded-2xl p-3 sm:p-6 w-full max-w-md max-h-[90vh] sm:max-h-[70vh] overflow-hidden flex flex-col" style={{ marginBottom: 'calc(65px + env(safe-area-inset-bottom))', paddingBottom: '12px' }}>
         {/* Swipe indicator for mobile */}
         <div className="sm:hidden flex justify-center mb-2">
           <div className="w-12 h-1 bg-gray-300 rounded-full"></div>
         </div>
-        
+
         <div className="flex items-center justify-between mb-4 sm:mb-6">
           <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
             {isEditing ? 'Edit Goal' : 'New Goal'}
           </h2>
-          <button onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+          <button type="button" onClick={onClose} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
             <X size={20} className="text-white" />
           </button>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4">
+
+        {/* Scrollable form area */}
+        <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-y-auto space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Goal Title *
@@ -336,29 +338,31 @@ const GoalModal = ({ isOpen, onClose, onSave, goal, isEditing }) => {
               </select>
             </div>
           </div>
-
-          <div className="flex gap-2 sm:gap-3 pt-4 border-t border-transparent sm:border-gray-200 dark:border-transparent dark:sm:border-gray-700 sticky bottom-0 bg-transparent dark:bg-transparent sm:bg-white dark:sm:bg-gray-800 pb-2">
-            <button 
-              type="button" 
-              onClick={onClose} 
-              className="flex-1 px-3 sm:px-4 py-2 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm sm:text-base"
-            >
-              Cancel
-            </button>
-            <button 
-              type="submit" 
-              disabled={loading || !formData.title.trim()} 
-              className="flex-1 px-3 sm:px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
-            >
-              {loading ? (
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              ) : (
-                <Save className="w-4 h-4" />
-              )}
-              {loading ? 'Saving...' : (isEditing ? 'Update' : 'Create')}
-            </button>
-          </div>
         </form>
+
+        {/* Action bar (outside scroll) so always visible) */}
+        <div className="flex gap-2 sm:gap-3 pt-4 border-t border-transparent sm:border-gray-200 dark:border-transparent dark:sm:border-gray-700 bg-transparent dark:bg-transparent sm:bg-white dark:sm:bg-gray-800" style={{ paddingBottom: 'calc(16px + env(safe-area-inset-bottom))' }}>
+          <button 
+            type="button" 
+            onClick={onClose} 
+            className="flex-1 px-3 sm:px-4 py-2 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm sm:text-base"
+          >
+            Cancel
+          </button>
+          <button 
+            type="submit" 
+            onClick={handleSubmit}
+            disabled={loading || !formData.title.trim()} 
+            className="flex-1 px-3 sm:px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
+          >
+            {loading ? (
+              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <Save className="w-4 h-4" />
+            )}
+            {loading ? 'Saving...' : (isEditing ? 'Update' : 'Create')}
+          </button>
+        </div>
       </div>
     </div>
   )

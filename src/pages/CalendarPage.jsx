@@ -89,8 +89,6 @@ const EventModal = ({ event, onSave, onClose, onDelete, isEditing = [] }) => {
 
     setSaving(true)
     try {
-      // Keep the relevant fields (category_id, goal_id, location) in payload so
-      // they are saved when provided. The parent `onSave` will handle DB vs demo.
       const payload = { ...formData }
       await onSave(payload)
       onClose()
