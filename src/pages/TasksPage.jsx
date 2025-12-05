@@ -555,7 +555,7 @@ export default function TasksPage() {
     }
   }, [user]);
 
-  // Create task function - VERSI DIPERBAIKI
+  // Create task function
   const createTask = async (taskData) => {
     if (!taskData.title.trim()) {
       throw new Error('Task title is required');
@@ -729,7 +729,7 @@ export default function TasksPage() {
     }
   };
 
-  // Handle create task - VERSI DIPERBAIKI
+  // Handle create task
   const handleCreateTask = async () => {
     if (!taskForm.title.trim()) {
       alert('Task title is required');
